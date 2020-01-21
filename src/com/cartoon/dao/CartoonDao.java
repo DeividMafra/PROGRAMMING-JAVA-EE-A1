@@ -80,7 +80,73 @@ public class CartoonDao {
 		}
 	}
 	
+	public void updateCartoon() throws ClassNotFoundException, SQLException {
+		try {
+		      
+			String sql = "update cartoons set Name = ?, Description = ?, PG = ? where idCartoons = ?";
+		       
+			Scanner sc = new Scanner(System.in);
+			
+			System.out.println("Please enter the cartoon Id!");
+			int id = sc.nextInt();
+			sc.nextLine(); // to consume the space
+			
+			System.out.println("Please enter the cartoon's name of id: "+id);
+			String name = sc.nextLine();
+						
+			System.out.println("Please enter the cartoon's description of id: "+id);
+			String desc = sc.nextLine();
+			
+			
+			System.out.println("Please enter the cartoon's Parental Guidance of id: "+id);
+			int pG = sc.nextInt();
+			sc.nextLine(); // to consume the space
+
+		  	Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		      
+			
+			pstmt.setString(1,name);
+			pstmt.setString(2,desc);
+			pstmt.setInt(3, pG);
+			pstmt.setInt(4, id);
+
+			pstmt.executeUpdate();
+			diplayCartoons();
+		      
+		    }
+		    catch (Exception e)
+		    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		    }
+		}
 	
-	
+	public void deleteCartoon() throws ClassNotFoundException, SQLException {
+		try {
+		      
+			String sql = "delete from cartoons where idCartoons = ?";
+		       
+			Scanner sc = new Scanner(System.in);
+			
+			System.out.println("Please enter Id to be deleted");
+			int id = sc.nextInt();
+
+		  	Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		      
+			pstmt.setInt(1, id);
+
+			pstmt.executeUpdate();
+			
+			System.out.println("Cartoon of id: "+id+ " deleted!");
+			  
+		    }
+		    catch (Exception e)
+		    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		    }
+		}
 
 }
