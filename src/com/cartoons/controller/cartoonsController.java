@@ -9,7 +9,6 @@ public class cartoonsController {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-
 			
 		CartoonDao obj = new CartoonDao();
 		Scanner sc = new Scanner(System.in);
